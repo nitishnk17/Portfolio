@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitish Kumar - Systems & Software Engineer | IIT Delhi</title>
+    <meta name="description"
+        content="Nitish Kumar - M.Tech Computer Science at IIT Delhi (2025-2027). Systems engineer building distributed symbolic execution engines, lock-free work-stealing runtimes, and memory-constrained query engines.">
+    <meta name="author" content="Nitish Kumar">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Three.js for 3D Interactive Background Scene -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="grain">
+
+    <!-- Ambient Aurora Glow Orbs -->
+    <div class="aurora">
+        <span class="aurora-1"></span>
+        <span class="aurora-2"></span>
+        <span class="aurora-3"></span>
+        <span class="aurora-4"></span>
+    </div>
+
+    <!-- WebGL Canvas for Connected Node Grid / Particles -->
+    <div id="webgl-container"></div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor-dot" id="cursor-dot"></div>
+    <div class="custom-cursor-ring" id="cursor-ring"></div>
+
+    <!-- Top Notification & Quick Contact Strip -->
+    <aside class="top-strip">
+        <div class="container-x top-strip-inner">
+            <div class="top-strip-left">
+                <span class="status-badge">
+                    <span class="pulse-dot">
+                        <span class="pulse-dot-ping"></span>
+                        <span class="pulse-dot-core"></span>
+                    </span>
+                    Open to Engineering &amp; Tech Roles · IIT Delhi
+                </span>
+                <a href="tel:+918227835726" class="contact-quick-link">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+91 82278 35726</span>
+                </a>
+                <a href="mailto:nk17.nitish1@gmail.com" class="contact-quick-link">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>nk17.nitish1@gmail.com</span>
+                </a>
+            </div>
+            <div class="top-strip-right">
+                <a href="https://github.com/nitishnk17" target="_blank" rel="noreferrer" class="social-icon-btn"
+                    title="GitHub">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/nitish-kumar-76272b1b6/" target="_blank" rel="noreferrer"
+                    class="social-icon-btn" title="LinkedIn">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+                <a href="mailto:nk17.nitish1@gmail.com" class="social-icon-btn" title="Email">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Sticky Main Navigation -->
+    <header class="navbar-sticky">
+        <div class="container-x navbar-inner">
+            <a href="#hero" class="brand-wrapper">
+                <div class="brand-text">
+                    <div class="brand-code-logo">
+                        <span class="logo-accent">&lt;</span>Nitish<span class="logo-accent">.nk17 /&gt;</span>
+                    </div>
+                    <span class="brand-role">IIT Delhi · M.Tech CSE</span>
+                </div>
+            </a>
+
+            <nav class="nav-links-list">
+                <a href="#internship" class="nav-item-link">Internship</a>
+                <a href="#thesis" class="nav-item-link">Thesis</a>
+                <a href="#projects" class="nav-item-link">Work</a>
+                <a href="#about" class="nav-item-link">About</a>
+                <a href="#extracurricular" class="nav-item-link">Activities</a>
+                <a href="#skills" class="nav-item-link">Toolkit</a>
+                <a href="#contact" class="nav-item-link">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="Nitish_Resume_.pdf" target="_blank" rel="noreferrer" class="btn-resume">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>Resume</span>
+                </a>
+                <button class="mobile-menu-trigger" id="mobile-toggle" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Navigation -->
+    <div class="mobile-nav-drawer" id="mobile-drawer">
+        <a href="#internship" onclick="closeMobileNav()">Internship</a>
+        <a href="#thesis" onclick="closeMobileNav()">Thesis</a>
+        <a href="#projects" onclick="closeMobileNav()">Work</a>
+        <a href="#about" onclick="closeMobileNav()">About</a>
+        <a href="#extracurricular" onclick="closeMobileNav()">Activities</a>
+        <a href="#skills" onclick="closeMobileNav()">Toolkit</a>
+        <a href="#contact" onclick="closeMobileNav()">Contact</a>
+    </div>
+
+    <!-- Main Content Stream -->
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <div class="container-x">
+                <div class="hero-content">
+                    <div class="hero-pill-badge">
+                        <span class="pulse-dot">
+                            <span class="pulse-dot-ping"></span>
+                            <span class="pulse-dot-core"></span>
+                        </span>
+                        <span>Open to Work</span>
+                    </div>
+
+                    <h1 class="hero-name-title">
+                        NITISH <span class="gradient-text">KUMAR</span>
+                    </h1>
+
+                    <!-- Dynamic Typing / Rotating Roles -->
+                    <div class="hero-rotator-wrapper">
+                        <span>I build</span>
+                        <span id="role-rotator" class="gradient-text-cyan">Parallel Symbolic Execution Engines</span>
+                        <span class="rotator-cursor"></span>
+                    </div>
+
+                    <div class="hero-meta-bar">
+                        <div class="hero-meta-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>New Delhi, India</span>
+                        </div>
+                        <div class="hero-meta-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <a href="tel:+918227835726" style="color: inherit; text-decoration: none;">+91 82278
+                                35726</a>
+                        </div>
+                        <div class="hero-meta-item">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <span>IIT Delhi (2025–2027)</span>
+                        </div>
+                    </div>
+
+                    <p class="hero-lead-text">
+                        I am an M.Tech student in Computer Science at <strong>IIT Delhi</strong>. I love solving tricky
+                        technical challenges and building clean, reliable, and high-impact software across the stack -
+                        from backend services and distributed runtimes to data-intensive pipelines. I learn fast, adapt
+                        quickly to new technologies and codebases, and am ready to contribute across diverse software
+                        engineering roles.
+                    </p>
+
+                    <div class="hero-cta-group">
+                        <a href="Nitish_Resume_.pdf" target="_blank" rel="noreferrer" class="btn-primary-action">
+                            <i class="fa-solid fa-file-pdf"></i> Resume (PDF)
+                        </a>
+                        <a href="#projects" class="btn-secondary-action">
+                            <i class="fa-solid fa-folder-open"></i> Projects
+                        </a>
+                        <a href="#contact" class="btn-secondary-action">
+                            <i class="fa-solid fa-envelope"></i> Get In Touch
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Telemetry & Live Highlight Counters -->
+                <div class="telemetry-banner">
+                    <div class="telemetry-card sheen">
+                        <div class="tel-fig gradient-text">2.47×</div>
+                        <div class="tel-label">Runtime Speedup Shipped @ KLEE</div>
+                    </div>
+                    <div class="telemetry-card sheen">
+                        <div class="tel-fig" style="color: var(--cyan);">64 MB</div>
+                        <div class="tel-label">RAM Limit TPC-H Engine (Top 5)</div>
+                    </div>
+                    <div class="telemetry-card sheen">
+                        <div class="tel-fig" style="color: var(--emerald);">5.43×</div>
+                        <div class="tel-label">Speedup with 4 Workers on KLEE 3.2</div>
+                    </div>
+                    <div class="telemetry-card sheen">
+                        <div class="tel-fig" style="color: var(--pink);">5.57×</div>
+                        <div class="tel-label">MPI Speedup (16 Processes)</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Internship at Cerify -->
+        <section class="section-block" id="internship">
+            <div class="container-x">
+                <div class="section-head-wrap">
+                    <span class="eyebrow">Experience</span>
+                    <h2 class="section-title-large">
+                        Internship at <span class="gradient-text"><a href="https://cerify.ai/about" target="_blank"
+                                rel="noreferrer" style="color:inherit;text-decoration:none;">Cerify.</a></span>
+                    </h2>
+                </div>
+
+                <div class="experience-timeline">
+                    <div class="exp-card-glow sheen">
+                        <div class="exp-header-row">
+                            <div>
+                                <h3 class="exp-role-title">Parallel Systems Software Engineer Intern</h3>
+                                <div class="exp-company-sub"><a href="https://cerify.ai/about" target="_blank"
+                                        rel="noreferrer" style="color:inherit;text-decoration:none;">Cerify</a> &middot;
+                                    SKLEE Multi-Core Symbolic Analyzer</div>
+                            </div>
+                            <span class="exp-period-chip">May 2026 - July 2026</span>
+                        </div>
+                        <ul class="exp-bullets-list">
+                            <li>Parallelized an industry-grade sequential smart-contract analyzer based on KLEE,
+                                restructuring state cloning routines into a highly efficient, custom semaphore-gated
+                                concurrency manager.</li>
+                            <li>Successfully achieved an outstanding <strong>~2.47&times; runtime speedup</strong>
+                                across modern multi-core nodes, ensuring full system determinism and output path
+                                integrity.</li>
+                            <li>Identified and resolved two deep-seated parallel race conditions (compiler-state
+                                collisions and concurrent directory access bugs) triggered only during high-stress
+                                testing cycles.</li>
+                            <li>Validated complete equivalence with the legacy single-threaded compiler across the full
+                                regression test suite of over 1,000 smart contracts.</li>
+                        </ul>
+                        <div class="project-tags-cloud">
+                            <span class="chip">C++</span>
+                            <span class="chip">KLEE</span>
+                            <span class="chip">Semaphores</span>
+                            <span class="chip">Multi-Threading</span>
+                            <span class="chip">Race Detection</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: IIT Delhi M.Tech Thesis -->
+        <section class="section-block" id="thesis">
+            <div class="container-x">
+                <div class="section-head-wrap">
+                    <span class="eyebrow">IIT Delhi · M.Tech Thesis · 2025-2027</span>
+                    <h2 class="section-title-large">
+                        Distributed Symbolic <span class="gradient-text">Execution Engine.</span>
+                    </h2>
+                </div>
+
+                <div class="exp-card-glow sheen" style="margin-top: 0;">
+                    <div class="exp-header-row">
+                        <div>
+                            <h3 class="exp-role-title">Dynamic Test-Depth Partitioning &amp; Distributed Work Stealing
+                            </h3>
+                            <div class="exp-company-sub">Indian Institute of Technology Delhi</div>
+                        </div>
+                        <span class="exp-period-chip">2025 - 2027 (Ongoing)</span>
+                    </div>
+                    <p style="color: var(--text-secondary); font-size: 15px; line-height: 1.75; margin: 16px 0;">
+                        Developing a scalable, distributed symbolic execution engine engineered on <strong>KLEE
+                            3.2</strong>. Built decentralized dynamic load balancing using custom lock-free,
+                        peer-to-peer <strong>Chase-Lev deques</strong> across cluster nodes. Integrated a globally
+                        synchronized <strong>GreenTrie Constraint Cache</strong> to eliminate redundant constraint
+                        solving passes, significantly slashing solver computation overhead (~90% of total runtime).
+                    </p>
+                    <ul class="exp-bullets-list">
+                        <li>Implemented decentralized task distribution with peer-to-peer Chase-Lev work-stealing deques
+                            for dynamic load balancing across cluster nodes.</li>
+                        <li>Shared GreenTrie constraint cache exploits overlapping path queries to eliminate redundant
+                            SMT solver calls (~90% of total runtime).</li>
+                        <li>Achieved <strong>5.43&times; speedup with 4 workers</strong> end-to-end in symbolic
+                            execution throughput on multi-core evaluation benchmarks.</li>
+                    </ul>
+                    <div class="project-tags-cloud" style="margin-top: 20px;">
+                        <span class="chip">C++</span>
+                        <span class="chip">KLEE 3.2</span>
+                        <span class="chip">Z3 SMT Solver</span>
+                        <span class="chip">Chase-Lev Deques</span>
+                        <span class="chip">GreenTrie Cache</span>
+                        <span class="chip">Distributed Systems</span>
+                        <span class="chip">Lock-Free</span>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <a href="https://github.com/nitishnk17" target="_blank" rel="noreferrer"
+                            class="btn-secondary-action" style="display:inline-flex; align-items:center; gap:8px;">
+                            <i class="fa-brands fa-github"></i> View on GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Work / Featured Projects -->
+        <section class="section-block" id="projects">
+            <div class="container-x">
+                <div class="section-head-wrap">
+                    <span class="eyebrow">Portfolio</span>
+                    <h2 class="section-title-large">
+                        Featured Work &amp; <span class="gradient-text">Systems Architecture.</span>
+                    </h2>
+                </div>
+
+                <!-- Project Filters -->
+                <div class="filter-tabs-row">
+                    <button class="filter-tab-pill active" onclick="filterProjects('all', this)">All Systems
+                        (6)</button>
+                    <button class="filter-tab-pill" onclick="filterProjects('parallel', this)">Parallel &amp;
+                        Distributed</button>
+                    <button class="filter-tab-pill" onclick="filterProjects('low-level', this)">OS &amp;
+                        Database</button>
+                    <button class="filter-tab-pill" onclick="filterProjects('compilers', this)">Compilers &amp;
+                        Toolchains</button>
+                </div>
+
+                <!-- Projects Showcase Grid -->
+                <div class="projects-masonry">
+
+                    <!-- Project 1: Work-Stealing Runtime -->
+                    <article class="project-feature-card sheen" data-domain="parallel">
+                        <div>
+                            <div class="project-card-top">
+                                <span class="project-badge-tag">Systems &amp; Concurrency</span>
+                                <div class="project-links-wrap">
+                                    <a href="https://github.com/nitishnk17/Design-and-Implementation-of-a-Work-Stealing-Parallel-Runtime-System"
+                                        target="_blank" rel="noreferrer" class="project-icon-link" title="Source Code">
+                                        <i class="fa-brands fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <h3 class="project-title-h3">Work-Stealing Parallel Runtime System</h3>
+                            <div class="project-subtitle-lead">Lock-Free User-Level Thread Scheduler from Scratch</div>
+                            <p class="project-desc-para">
+                                Task-parallel runtime built from scratch in C++: custom user-level cooperative
+                                threading, lock-free Chase-Lev deques, futex-based kernel synchronization, and fork-join
+                                primitives (spawn/sync, parallel-for, parallel-reduce). Verified 0 data races with
+                                deterministic invariant checks and <strong>~95% load balance</strong> under adversarial
+                                task-cost skew, scaling competitively against OpenMP.
+                            </p>
+                            <ul class="project-highlights-list">
+                                <li><strong>Zero data races</strong> verified with deterministic invariant checks and
+                                    ThreadSanitizer (TSan).</li>
+                                <li>Benchmarked against OpenMP, showing competitive multi-core scaling under adversarial
+                                    task skew.</li>
+                            </ul>
+                        </div>
+                        <div class="project-tags-cloud">
+                            <span class="chip">C++</span>
+                            <span class="chip">Lock-Free Deques</span>
+                            <span class="chip">Futex Primitives</span>
+                            <span class="chip">Fork-Join API</span>
+                            <span class="chip">OpenMP</span>
+                            <span class="chip">TSan</span>
+                        </div>
+                    </article>
+
+                    <!-- Project 3: Memory-Constrained TPC-H Engine -->
+                    <article class="project-feature-card sheen" data-domain="low-level">
+                        <div>
+                            <div class="project-card-top">
+                                <span class="project-badge-tag">Database Systems · Top 5 Rank</span>
+                                <div class="project-links-wrap">
+                                    <a href="https://github.com/nitishnk17/DB55" target="_blank" rel="noreferrer"
+                                        class="project-icon-link" title="Source Code">
+                                        <i class="fa-brands fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <h3 class="project-title-h3">DB55 Memory-Constrained TPC-H Engine</h3>
+                            <div class="project-subtitle-lead">Out-of-Core Query Processing Under Strict 64MB RAM</div>
+                            <p class="project-desc-para">
+                                Out-of-core TPC-H query execution engine operating under a strict <strong>64MB
+                                    RAM</strong> and 10GB scratch-disk budget. Designed adaptive memory partitioning and
+                                buffer pool with O(1) LRU eviction, dynamic filtering, projection pushdown, and hybrid
+                                hash/sort-merge joins with external k-way sorting. Ranked <strong>Top 5 on the class
+                                    performance leaderboard</strong>.
+                            </p>
+                            <ul class="project-highlights-list">
+                                <li>Custom pipe-based disk simulator for persistent I/O with sequential-scan bypass
+                                    &amp; block recycling.</li>
+                                <li>Hybrid hash &amp; external k-way sort-merge joins with dynamic predicate projection
+                                    pushdown.</li>
+                            </ul>
+                        </div>
+                        <div class="project-tags-cloud">
+                            <span class="chip">C++</span>
+                            <span class="chip">TPC-H Benchmark</span>
+                            <span class="chip">LRU Buffer Pool</span>
+                            <span class="chip">External Sort</span>
+                            <span class="chip">Out-of-Core</span>
+                        </div>
+                    </article>
+
+                    <!-- Project 5: Integrated Compiler/VM -->
+                    <article class="project-feature-card sheen" data-domain="compilers">
+                        <div>
+                            <div class="project-card-top">
+                                <span class="project-badge-tag">Compilers &amp; Runtimes</span>
+                                <div class="project-links-wrap">
+                                    <a href="https://github.com/nitishnk17/Integrate" target="_blank" rel="noreferrer"
+                                        class="project-icon-link" title="Source Code">
+                                        <i class="fa-brands fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <h3 class="project-title-h3">Integrated Language Toolchain</h3>
+                            <div class="project-subtitle-lead">End-to-End Compiler, Stack VM, CLI Debugger &amp; GC</div>
+                            <p class="project-desc-para">
+                                End-to-end language ecosystem in C++: Flex/Bison frontend for lexical parsing, AST
+                                construction, bytecode compilation, and a stack-based VM running in a process-manager
+                                shell. Integrated an interactive CLI debugger supporting breakpoints and variable
+                                inspection, paired with a custom <strong>Mark-and-Sweep garbage collector</strong>.
+                            </p>
+                            <ul class="project-highlights-list">
+                                <li>Full compiler pipeline: Lexer/Parser, Abstract Syntax Tree, Bytecode VM execution.
+                                </li>
+                                <li>Interactive debugger with <strong>breakpoint injection</strong>, single-stepping,
+                                    and mark-and-sweep GC.</li>
+                            </ul>
+                        </div>
+                        <div class="project-tags-cloud">
+                            <span class="chip">C++</span>
+                            <span class="chip">Flex &amp; Bison</span>
+                            <span class="chip">Bytecode VM</span>
+                            <span class="chip">Mark-Sweep GC</span>
+                            <span class="chip">Debugger CLI</span>
+                        </div>
+                    </article>
+
+                    <!-- Project 6: Low-Latency TCP Server & Load Balancer -->
+                    <article class="project-feature-card sheen" data-domain="low-level">
+                        <div>
+                            <div class="project-card-top">
+                                <span class="project-badge-tag">Networking &amp; Infrastructure</span>
+                                <div class="project-links-wrap">
+                                    <a href="https://github.com/nitishnk17/Load-Balancer" target="_blank"
+                                        rel="noreferrer" class="project-icon-link" title="Source Code">
+                                        <i class="fa-brands fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <h3 class="project-title-h3">Low-Latency TCP Server &amp; Load Balancer</h3>
+                            <div class="project-subtitle-lead">POSIX Multi-Threaded Server with Sharded Queues</div>
+                            <p class="project-desc-para">
+                                Multi-threaded TCP server deploying SJF and Round-Robin scheduler thread queues. Built
+                                an external load balancer with connection pooling and a <strong>4-way sharded scheduler
+                                    queue</strong> to eliminate lock contention. Designed a dynamic Least-Response-Time
+                                routing algorithm curing a critical traffic collapse bug caused by polling delay.
+                            </p>
+                            <ul class="project-highlights-list">
+                                <li><strong>4-way sharded queue architecture</strong> to eliminate mutex contention
+                                    across worker threads.</li>
+                                <li>Dynamic Least-Response-Time scheduling with connection pooling and health telemetry.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="project-tags-cloud">
+                            <span class="chip">C++</span>
+                            <span class="chip">POSIX Sockets</span>
+                            <span class="chip">Lock Sharding</span>
+                            <span class="chip">Load Balancing</span>
+                            <span class="chip">Multi-Threading</span>
+                        </div>
+                    </article>
+
+                    <!-- Project 5: Accelerated Mobile Video Processing System -->
+                    <article class="project-feature-card sheen" data-domain="parallel">
+                        <div>
+                            <div class="project-card-top">
+                                <span class="project-badge-tag">Mobile &amp; Parallel Systems</span>
+                                <div class="project-links-wrap">
+                                    <a href="https://github.com/nitishnk17/Accelerated-Mobile-Video-Processing-System"
+                                        target="_blank" rel="noreferrer" class="project-icon-link" title="Source Code">
+                                        <i class="fa-brands fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <h3 class="project-title-h3">Accelerated Mobile Video Processing System</h3>
+                            <div class="project-subtitle-lead">Real-Time Native Android Camera Pipeline</div>
+                            <p class="project-desc-para">
+                                Built a real-time Android camera app streaming live YUV frames through a JNI bridge to
+                                native C++ for edge-detection, with a live FPS/latency overlay tracking per-stage
+                                timings and cross-backend correctness checks.
+                            </p>
+                            <ul class="project-highlights-list">
+                                <li>Designed and benchmarked three parallel Sobel pipelines: scalar C++, ARM NEON SIMD,
+                                    and hybrid CPU/GPU.</li>
+                                <li>Achieved <strong>7&times; speedup with NEON</strong> and <strong>240-250&times; with
+                                        hybrid mode</strong> over the scalar baseline using an adaptive CPU/GPU
+                                    scheduler with double-buffered asynchronous GPU dispatch.</li>
+                            </ul>
+                        </div>
+                        <div class="project-tags-cloud">
+                            <span class="chip">C++</span>
+                            <span class="chip">Android NDK &amp; JNI</span>
+                            <span class="chip">ARM NEON SIMD</span>
+                            <span class="chip">Hybrid CPU/GPU</span>
+                            <span class="chip">Async Dispatch</span>
+                        </div>
+                    </article>
+
+                    <!-- Project 8: Graph Analysis & MPI Clique Finder -->
+                    <article class="project-feature-card sheen" data-domain="parallel">
+                        <div>
+                            <div class="project-card-top">
+                                <span class="project-badge-tag">HPC &amp; Distributed Graphs</span>
+                                <div class="project-links-wrap">
+                                    <a href="https://github.com/nitishnk17/Parallel-Distributed-Graph-Analysis"
+                                        target="_blank" rel="noreferrer" class="project-icon-link" title="Source Code">
+                                        <i class="fa-brands fa-github"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <h3 class="project-title-h3">Parallel Distributed Graph Analysis</h3>
+                            <div class="project-subtitle-lead">MPI-Parallelized Graph Algorithms on SNAP Datasets</div>
+                            <p class="project-desc-para">
+                                Parallelized Breadth-First Search, PageRank, and maximal clique detection on large
+                                Stanford SNAP graphs. Built a distributed Bron-Kerbosch clique finder using MPI
+                                point-to-point and collective communication, achieving <strong>5.57× speedup across 16
+                                    MPI processes</strong>.
+                            </p>
+                            <ul class="project-highlights-list">
+                                <li>Distributed Bron-Kerbosch maximal clique finder with MPI collective communication.
+                                </li>
+                                <li>Processed multi-million edge SNAP datasets with high-throughput graph partitioning.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="project-tags-cloud">
+                            <span class="chip">C++</span>
+                            <span class="chip">MPI</span>
+                            <span class="chip">OpenMP</span>
+                            <span class="chip">Graph Algorithms</span>
+                            <span class="chip">HPC</span>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: About Me & Education -->
+        <section class="section-block" id="about">
+            <div class="container-x">
+                <div class="section-head-wrap">
+                    <span class="eyebrow">Background</span>
+                    <h2 class="section-title-large">
+                        Where I've been, and <span class="gradient-text">how I think.</span>
+                    </h2>
+                </div>
+
+                <div class="about-grid-layout">
+                    <!-- Left: Philosophy & Core Strengths -->
+                    <div class="about-card-panel sheen">
+                        <div class="eyebrow">Engineering Philosophy</div>
+                        <p class="about-bio-text mt-3">
+                            My approach to software engineering combines strong computer science fundamentals with a
+                            pragmatic, results-driven mindset. At <strong>IIT Delhi</strong>, I focus on building
+                            reliable software, efficient algorithms, concurrent systems, and data processing engines. I
+                            enjoy writing clean, maintainable code and quickly getting up to speed on new domains and
+                            tech stacks.
+                        </p>
+                        <p class="about-bio-text">
+                            I thrive in collaborative, high-ownership engineering environments where I can tackle
+                            challenging problems end-to-end. Beyond engineering, I spent two years coordinating student
+                            volunteer initiatives with <strong>NSS &amp; UBA</strong> and actively mentor undergraduates
+                            as a Teaching Assistant. When I'm away from the keyboard, you'll usually find me on the
+                            field playing cricket or badminton.
+                        </p>
+
+                        <div class="strength-cards-stack">
+                            <div class="strength-item-card">
+                                <div class="strength-title"><i class="fa-solid fa-microchip"></i> Strong CS Fundamentals
+                                    &amp; Algorithms</div>
+                                <div class="strength-desc">Rigorous problem-solving grounded in deep understanding of
+                                    data structures, algorithmic complexity, memory management, and system architecture.
+                                </div>
+                            </div>
+                            <div class="strength-item-card">
+                                <div class="strength-title"><i class="fa-solid fa-server"></i> Backend &amp; Distributed
+                                    Systems</div>
+                                <div class="strength-desc">Experience architecting concurrent runtimes, lock-free data
+                                    structures, multi-threaded pipelines, and query engines that scale predictably under
+                                    heavy load.</div>
+                            </div>
+                            <div class="strength-item-card">
+                                <div class="strength-title"><i class="fa-solid fa-bolt"></i> Fast Learner &amp; Highly
+                                    Adaptable</div>
+                                <div class="strength-desc">Quickly masters new programming languages, frameworks, and
+                                    domain tooling to deliver immediate impact across frontend, backend, or
+                                    infrastructure.</div>
+                            </div>
+                            <div class="strength-item-card">
+                                <div class="strength-title"><i class="fa-solid fa-users"></i> Collaborative Leadership
+                                    &amp; Mentorship</div>
+                                <div class="strength-desc">Proven track record leading community initiatives (NSS/UBA),
+                                    mentoring 100+ undergraduate students as a TA, and writing clear technical
+                                    documentation.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Structured Education Timeline -->
+                    <div class="about-card-panel sheen">
+                        <div class="eyebrow"><i class="fa-solid fa-graduation-cap"
+                                style="color: var(--indigo); margin-right: 6px;"></i> Academic Pedigree</div>
+
+                        <div class="edu-timeline-wrap">
+                            <div class="edu-card-item active-edu">
+                                <div class="edu-card-header">
+                                    <div class="edu-icon-badge">
+                                        <i class="fa-solid fa-building-columns"></i>
+                                    </div>
+                                    <div class="edu-card-meta">
+                                        <div class="edu-node-period-pill"><i class="fa-regular fa-calendar"
+                                                style="margin-right: 4px;"></i> 2025 - 2027 (Ongoing)</div>
+                                        <h3 class="edu-node-degree">M.Tech in Computer Science &amp; Engineering</h3>
+                                        <div class="edu-node-school">Indian Institute of Technology Delhi (IIT Delhi)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="edu-card-item">
+                                <div class="edu-card-header">
+                                    <div class="edu-icon-badge muted">
+                                        <i class="fa-solid fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="edu-card-meta">
+                                        <div class="edu-node-period-pill"><i class="fa-regular fa-calendar"
+                                                style="margin-right: 4px;"></i> 2019 - 2023</div>
+                                        <h3 class="edu-node-degree">B.Tech in Computer Science &amp; Engineering</h3>
+                                        <div class="edu-node-school">Tezpur University</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Extra-Curricular Activities -->
+        <section class="section-block" id="extracurricular">
+            <div class="container-x">
+                <div class="section-head-wrap">
+                    <span class="eyebrow">Beyond the Code</span>
+                    <h2 class="section-title-large">
+                        Extra-Curricular &amp; <span class="gradient-text">Leadership.</span>
+                    </h2>
+                </div>
+
+                <div class="experience-timeline">
+
+                    <!-- Graduate Teaching Assistant -->
+                    <div class="exp-card-glow sheen">
+                        <div class="exp-header-row">
+                            <div>
+                                <h3 class="exp-role-title">Graduate Teaching Assistant</h3>
+                                <div class="exp-company-sub">Indian Institute of Technology Delhi (IIT Delhi)</div>
+                            </div>
+                            <span class="exp-period-chip">July 2025 - June 2026</span>
+                        </div>
+                        <ul class="exp-bullets-list">
+                            <li><strong>COL1000 - Introduction to Programming (Jan 2026 - Jun 2026):</strong> Taught
+                                fundamental programming paradigms, memory layout tracking, pointers, and logic
+                                dry-running in C++. Led diagnostic evaluation design and optimised grading pipelines.
+                            </li>
+                            <li><strong>COL106 - Data Structures and Algorithms (Jul 2025 - Dec 2025):</strong>
+                                Instructed, graded, and mentored a laboratory cohort of over 100 undergraduate CS
+                                students. Evaluated projects in pointer-heavy structures, balanced trees, and graph
+                                algorithms in optimised C++.</li>
+                        </ul>
+                        <div class="project-tags-cloud">
+                            <span class="chip">C++</span>
+                            <span class="chip">Data Structures</span>
+                            <span class="chip">Algorithms</span>
+                            <span class="chip">Academic Mentorship</span>
+                        </div>
+                    </div>
+
+                    <!-- Leadership & Community Outreach -->
+                    <div class="exp-card-glow sheen">
+                        <div class="exp-header-row">
+                            <div>
+                                <h3 class="exp-role-title">Student Coordinator - Community &amp; Leadership</h3>
+                                <div class="exp-company-sub">National Service Scheme (NSS) &amp; Unnat Bharat Abhiyan
+                                    (UBA) &middot; Tezpur University</div>
+                            </div>
+                            <span class="exp-period-chip">2020 - 2022</span>
+                        </div>
+                        <ul class="exp-bullets-list">
+                            <li>Served as Student Coordinator for the <strong>National Service Scheme (NSS)</strong>
+                                (2020-2022), organising community welfare campaigns, blood donation camps, and social
+                                awareness drives.</li>
+                            <li>Served as Student Coordinator for <strong>Unnat Bharat Abhiyan (UBA)</strong>
+                                (2021-2022), leading rural development outreach, digital literacy workshops, and school
+                                mentoring across adopted villages.</li>
+                            <li>Demonstrated strong organisational leadership, team coordination, and effective
+                                communication across large student cohorts.</li>
+                        </ul>
+                        <div class="project-tags-cloud">
+                            <span class="chip">Team Leadership</span>
+                            <span class="chip">Community Outreach</span>
+                            <span class="chip">Event Coordination</span>
+                            <span class="chip">NSS</span>
+                            <span class="chip">UBA</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Toolkit / Competencies -->
+        <section class="section-block" id="skills">
+            <div class="container-x">
+                <div class="section-head-wrap">
+                    <span class="eyebrow">Arsenal</span>
+                    <h2 class="section-title-large">
+                        The stack I reach <span class="gradient-text">for by default.</span>
+                    </h2>
+                </div>
+
+                <div class="skills-grid-layout">
+                    <!-- Box 1: Languages & Core CS -->
+                    <div class="skill-category-card sheen">
+                        <div class="skill-card-head">
+                            <h3 class="skill-category-title">Languages &amp; Core CS</h3>
+                        </div>
+                        <div class="skill-pills-wrap">
+                            <span class="skill-pill-item">C</span>
+                            <span class="skill-pill-item">C++</span>
+                            <span class="skill-pill-item">Python</span>
+                            <span class="skill-pill-item">SQL</span>
+                            <span class="skill-pill-item">Data Structures &amp; Algorithms</span>
+                            <span class="skill-pill-item">Operating Systems</span>
+                            <span class="skill-pill-item">Database Internals</span>
+                            <span class="skill-pill-item">Multithreading</span>
+                        </div>
+                    </div>
+
+                    <!-- Box 2: Parallel & Systems Engineering -->
+                    <div class="skill-category-card sheen">
+                        <div class="skill-card-head">
+                            <h3 class="skill-category-title">Parallel &amp; Systems Engineering</h3>
+                        </div>
+                        <div class="skill-pills-wrap">
+                            <span class="skill-pill-item">Distributed Systems</span>
+                            <span class="skill-pill-item">OpenMP</span>
+                            <span class="skill-pill-item">MPI</span>
+                            <span class="skill-pill-item">CUDA</span>
+                            <span class="skill-pill-item">ARM NEON SIMD</span>
+                            <span class="skill-pill-item">Lock-Free Deques</span>
+                            <span class="skill-pill-item">KLEE 3.2</span>
+                            <span class="skill-pill-item">Z3 SMT Solver</span>
+                            <span class="skill-pill-item">Flex &amp; Bison</span>
+                            <span class="skill-pill-item">Bytecode VM</span>
+                            <span class="skill-pill-item">RISC-V ISA</span>
+                            <span class="skill-pill-item">Vivado HLS</span>
+                        </div>
+                    </div>
+
+                    <!-- Box 3: Tools & Developer Workflows -->
+                    <div class="skill-category-card sheen">
+                        <div class="skill-card-head">
+                            <h3 class="skill-category-title">Tools &amp; Workflows</h3>
+                        </div>
+                        <div class="skill-pills-wrap">
+                            <span class="skill-pill-item">Docker</span>
+                            <span class="skill-pill-item">Git &amp; GitHub</span>
+                            <span class="skill-pill-item">ThreadSanitizer (TSan)</span>
+                            <span class="skill-pill-item">LLM-Assisted Dev</span>
+                            <span class="skill-pill-item">Prompt Engineering</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Contact & Connect -->
+        <section class="section-block" id="contact">
+            <div class="container-x">
+
+                <div class="contact-hero-banner sheen">
+                    <span class="eyebrow">Connect</span>
+                    <h2 class="contact-headline">
+                        Let's build <br><span class="gradient-text">something solid.</span>
+                    </h2>
+                    <p class="contact-lead-sub">
+                        I am actively open to full-time engineering and technical roles across software, systems,
+                        backend, data, and infrastructure. My inbox is open.
+                    </p>
+
+                    <div class="contact-buttons-cluster">
+                        <a href="mailto:nk17.nitish1@gmail.com" class="btn-email-primary">
+                            <i class="fa-solid fa-envelope"></i> nk17.nitish1@gmail.com <i
+                                class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <button class="btn-copy-interactive" onclick="copyText('nk17.nitish1@gmail.com', this)">
+                            <i class="fa-regular fa-copy"></i> Copy Email
+                        </button>
+                    </div>
+
+                    <div>
+                        <a href="tel:+918227835726" class="contact-phone-link">
+                            <i class="fa-solid fa-phone"></i> +91 82278 35726
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Contact Message Form -->
+                <div class="contact-form-container sheen">
+                    <form action="https://formsubmit.co/nk17.nitish1@gmail.com" method="POST">
+                        <input type="hidden" name="_subject" value="New Portfolio Contact Message for Nitish Kumar!">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+
+                        <div class="form-grid-2">
+                            <div class="form-group-field">
+                                <label>Your Name</label>
+                                <input type="text" name="name" placeholder="Alex Morgan" required>
+                            </div>
+                            <div class="form-group-field">
+                                <label>Your Email</label>
+                                <input type="email" name="email" placeholder="alex@company.com" required>
+                            </div>
+                        </div>
+                        <div class="form-group-field">
+                            <label>Subject</label>
+                            <input type="text" name="subject" placeholder="SWE Role Inquiry / Systems Project" required>
+                        </div>
+                        <div class="form-group-field">
+                            <label>Message</label>
+                            <textarea name="message" rows="4"
+                                placeholder="Hi Nitish, let's discuss an engineering opportunity..."
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn-form-submit">
+                            <i class="fa-solid fa-paper-plane"></i> Send Direct Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Social & Profile Links Grid -->
+                <div class="profiles-social-grid">
+                    <a href="https://github.com/nitishnk17" target="_blank" rel="noreferrer"
+                        class="profile-link-card sheen">
+                        <i class="fa-brands fa-github profile-card-icon"></i>
+                        <div class="profile-card-info">
+                            <span class="profile-card-label">GitHub · Repositories</span>
+                            <span class="profile-card-val">github.com/nitishnk17</span>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/nitish-kumar-76272b1b6/" target="_blank" rel="noreferrer"
+                        class="profile-link-card sheen">
+                        <i class="fa-brands fa-linkedin-in profile-card-icon"></i>
+                        <div class="profile-card-info">
+                            <span class="profile-card-label">LinkedIn · Professional</span>
+                            <span class="profile-card-val">in/nitish-kumar-76272b1b6</span>
+                        </div>
+                    </a>
+
+                    <a href="mailto:nk17.nitish1@gmail.com" class="profile-link-card sheen">
+                        <i class="fa-solid fa-envelope profile-card-icon"></i>
+                        <div class="profile-card-info">
+                            <span class="profile-card-label">Email · Direct Contact</span>
+                            <span class="profile-card-val">nk17.nitish1@gmail.com</span>
+                        </div>
+                    </a>
+
+                    <a href="Nitish_Resume_.pdf" target="_blank" rel="noreferrer" class="profile-link-card sheen">
+                        <i class="fa-solid fa-file-pdf profile-card-icon" style="color: var(--emerald);"></i>
+                        <div class="profile-card-info">
+                            <span class="profile-card-label">Resume · Official PDF</span>
+                            <span class="profile-card-val">Nitish_Resume_.pdf</span>
+                        </div>
+                    </a>
+
+                    <a href="tel:+918227835726" class="profile-link-card sheen">
+                        <i class="fa-solid fa-phone profile-card-icon"></i>
+                        <div class="profile-card-info">
+                            <span class="profile-card-label">Phone · New Delhi</span>
+                            <span class="profile-card-val">+91 82278 35726</span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+        <div class="container-x footer-inner-row">
+            <div class="footer-left">
+                <div class="footer-avatar"><span class="footer-logo-bracket">&lt;</span>NK<span
+                        class="footer-logo-bracket"> /&gt;</span></div>
+                <span class="footer-copy-text">&copy; 2026 Nitish Kumar · Indian Institute of Technology Delhi</span>
+            </div>
+            <p class="footer-tagline">Engineered with high performance and low latency in mind</p>
+            <a href="#hero" class="footer-back-top">Back to top ↑</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
