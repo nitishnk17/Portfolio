@@ -1,4 +1,4 @@
-// Static file server + Gemini proxy. The API key stays server-side in .env.
+// Static file server + Groq proxy. The API key stays server-side in .env.
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
@@ -10,7 +10,7 @@ try {
     }
 } catch (e) { /* .env optional if variables are set in the host environment */ }
 
-const { GEMINI_API_KEY, GEMINI_MODEL = 'gemini-3.8-flash', PORT = 8000 } = process.env;
+const { GROQ_API_KEY, GROQ_MODEL = 'openai/gpt-oss-120b', PORT = 8000 } = process.env;
 const PUBLIC = new Set(['index.html', 'styles.css', 'script.js', 'chatbot.js', 'chatbot-knowledge.js', 'Nitish_Resume_.pdf']);
 const TYPES = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.pdf': 'application/pdf' };
 
@@ -24,7 +24,7 @@ function limited(ip) {
 }
 
 async function chat(req, res) {
-    if (!GEMINI_API_KEY) return send(res, 500, { error: 'not configured' });
+    if (!GROQ_API_KEY) return send(res, 500, { error: 'not configured' });
     if (limited(req.socket.remoteAddress)) return send(res, 429, { error: 'rate limited' });
     let body = '';
     for await (const chunk of req) {
@@ -33,21 +33,25 @@ async function chat(req, res) {
     }
     let parsed;
     try { parsed = JSON.parse(body); } catch { return send(res, 400, { error: 'bad json' }); }
-    // Forward only the fields the widget needs; model and key are fixed server-side.
-    const payload = {
-        systemInstruction: parsed.systemInstruction,
-        contents: parsed.contents,
-        generationConfig: { temperature: 0.3, maxOutputTokens: 600 }
-    };
+    if (!Array.isArray(parsed.messages) || typeof parsed.system !== 'string') return send(res, 400, { error: 'bad request' });
     try {
-        const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
+        const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'x-goog-api-key': GEMINI_API_KEY },
-            body: JSON.stringify(payload)
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${GROQ_API_KEY}` },
+            signal: AbortSignal.timeout(20000),
+            body: JSON.stringify({
+                model: GROQ_MODEL,
+                messages: [{ role: 'system', content: parsed.system }, ...parsed.messages],
+                temperature: 0.3,
+                max_completion_tokens: 1000,
+                reasoning_effort: 'low'
+            })
         });
-        send(res, r.status, await r.json());
+        const data = await r.json();
+        if (!r.ok) return send(res, r.status, { error: 'upstream error' });
+        send(res, 200, { text: data.choices?.[0]?.message?.content || '' });
     } catch (e) {
-        send(res, 502, { error: 'upstream failure' });
+        send(res, 504, { error: 'upstream timeout' });
     }
 }
 

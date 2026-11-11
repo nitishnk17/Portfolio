@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PORTFOLIO AI ASSISTANT — Gemini-powered, answers only from Nitish's resume
+   PORTFOLIO AI ASSISTANT — Groq-powered, answers only from Nitish's resume
    ========================================================================== */
 
 (function () {
@@ -26,7 +26,7 @@ ${knowledge}`;
         'How can I contact him?'
     ];
 
-    const history = []; // [{role: 'user'|'model', parts: [{text}]}]
+    const history = []; // [{role: 'user'|'assistant', content}]
     let busy = false;
 
     const el = (tag, cls, text) => {
@@ -93,11 +93,11 @@ ${knowledge}`;
             const pending = addMsg('Thinking…', 'bot nk-typing');
 
             try {
-                const reply = await callGemini(question);
+                const reply = await callAssistant(question);
                 pending.classList.remove('nk-typing');
                 pending.textContent = reply;
-                history.push({ role: 'user', parts: [{ text: question }] });
-                history.push({ role: 'model', parts: [{ text: reply }] });
+                history.push({ role: 'user', content: question });
+                history.push({ role: 'assistant', content: reply });
                 if (history.length > MAX_HISTORY) history.splice(0, history.length - MAX_HISTORY);
             } catch (err) {
                 pending.classList.remove('nk-typing');
@@ -137,15 +137,15 @@ ${knowledge}`;
         });
     }
 
-    async function callGemini(question) {
+    async function callAssistant(question) {
         let res;
         try {
             res = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-                    contents: [...history, { role: 'user', parts: [{ text: question }] }]
+                    system: SYSTEM_PROMPT,
+                    messages: [...history, { role: 'user', content: question }]
                 })
             });
         } catch (e) {
@@ -153,12 +153,12 @@ ${knowledge}`;
         }
         if (!res.ok) {
             if (res.status === 429) throw new Error('Too many requests right now. Please try again in a moment.');
-            if (res.status === 503 || res.status === 504) throw new Error('The AI service is busy right now. Please try again in a minute.');
-            if (res.status === 400 || res.status === 403) throw new Error('The assistant could not authenticate. Please contact Nitish directly.');
+            if (res.status === 502 || res.status === 503 || res.status === 504) throw new Error('The AI service is busy right now. Please try again in a minute.');
+            if (res.status === 401 || res.status === 403) throw new Error('The assistant could not authenticate. Please contact Nitish directly.');
             throw new Error('Something went wrong. Please try again.');
         }
         const data = await res.json();
-        const text = data.candidates?.[0]?.content?.parts?.map((p) => p.text).join('').trim();
+        const text = (data.text || '').trim();
         if (!text) throw new Error("I couldn't generate an answer for that. Try rephrasing your question.");
         return text;
     }
