@@ -2284,7 +2284,68 @@ body {
 .nk-chat-send:hover:not(:disabled) { transform: scale(1.06); }
 .nk-chat-send:disabled { opacity: 0.45; cursor: default; }
 
+.nk-nudge {
+    position: fixed;
+    right: 24px;
+    bottom: 94px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 4px 4px 4px;
+    background: rgba(13, 17, 23, 0.97);
+    border: 1px solid var(--line-hover);
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.7), var(--shadow-glow-sky);
+    font-family: var(--font-sans);
+    animation: nk-nudge-in 0.4s cubic-bezier(0.2, 1.2, 0.3, 1);
+}
+.nk-nudge[hidden] { display: none; }
+.nk-nudge::after {
+    content: '';
+    position: absolute;
+    right: 22px;
+    bottom: -7px;
+    width: 12px;
+    height: 12px;
+    background: rgba(13, 17, 23, 0.97);
+    border-right: 1px solid var(--line-hover);
+    border-bottom: 1px solid var(--line-hover);
+    transform: rotate(45deg);
+}
+.nk-nudge-text {
+    background: none;
+    border: none;
+    padding: 9px 6px 9px 12px;
+    color: var(--text-secondary);
+    font: inherit;
+    font-size: 13.5px;
+    cursor: pointer;
+}
+.nk-nudge-text strong { color: var(--sky); font-weight: 700; }
+.nk-nudge-text:hover { color: var(--text-primary); }
+.nk-nudge-close {
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    color: var(--text-muted);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+}
+.nk-nudge-close:hover { color: var(--text-primary); }
+@keyframes nk-nudge-in {
+    from { opacity: 0; transform: translateY(10px) scale(0.92); }
+    to { opacity: 1; transform: none; }
+}
+.nk-chat-fab:not(.is-open) { animation: nk-fab-pulse 2.6s ease-out 1s 3; }
+@keyframes nk-fab-pulse {
+    0% { box-shadow: var(--shadow-glow-sky), 0 0 0 0 rgba(56, 189, 248, 0.5); }
+    70%, 100% { box-shadow: var(--shadow-glow-sky), 0 0 0 16px rgba(56, 189, 248, 0); }
+}
+
 @media (max-width: 480px) {
     .nk-chat-fab { right: 16px; bottom: 16px; }
+    .nk-nudge { right: 16px; bottom: 86px; }
     .nk-chat-panel { right: 16px; bottom: 16px; height: calc(100vh - 32px); }
 }

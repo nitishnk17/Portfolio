@@ -93,6 +93,10 @@ ${knowledge}`;
         fab.setAttribute('aria-label', 'Open AI assistant');
         fab.innerHTML = '<i class="fa-solid fa-robot"></i>';
 
+        const nudge = el('div', 'nk-nudge');
+        nudge.hidden = true;
+        nudge.innerHTML = '<button type="button" class="nk-nudge-text">Hi! <strong>Ask me anything</strong> about Nitish</button><button type="button" class="nk-nudge-close" aria-label="Dismiss">&times;</button>';
+
         const panel = el('div', 'nk-chat-panel');
         panel.setAttribute('role', 'dialog');
         panel.setAttribute('aria-label', 'Ask about Nitish');
@@ -124,7 +128,7 @@ ${knowledge}`;
         form.append(input, send);
 
         panel.append(head, log, chips, form);
-        document.body.append(fab, panel);
+        document.body.append(fab, nudge, panel);
 
         const scroll = () => { log.scrollTop = log.scrollHeight; };
 
@@ -192,12 +196,28 @@ ${knowledge}`;
             ask(q);
         });
 
+        const hideNudge = () => { nudge.hidden = true; };
         const toggle = (open) => {
+            if (open) hideNudge();
             panel.hidden = !open;
             fab.classList.toggle('is-open', open);
             if (open) input.focus();
         };
         fab.addEventListener('click', () => toggle(panel.hidden));
+        nudge.querySelector('.nk-nudge-text').addEventListener('click', () => toggle(true));
+        nudge.querySelector('.nk-nudge-close').addEventListener('click', hideNudge);
+
+        // Invite visitors to chat once per session, a few seconds after load.
+        let seen = false;
+        try { seen = sessionStorage.getItem('nk-nudge') === '1'; } catch (e) { /* storage unavailable */ }
+        if (!seen) {
+            setTimeout(() => {
+                if (!panel.hidden) return;
+                nudge.hidden = false;
+                try { sessionStorage.setItem('nk-nudge', '1'); } catch (e) { /* ignore */ }
+                setTimeout(hideNudge, 14000);
+            }, 3000);
+        }
         close.addEventListener('click', () => toggle(false));
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && !panel.hidden) toggle(false);
