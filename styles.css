@@ -2345,7 +2345,21 @@ body {
 }
 
 @media (max-width: 480px) {
-    .nk-chat-fab { right: 16px; bottom: 16px; }
-    .nk-nudge { right: 16px; bottom: 86px; }
-    .nk-chat-panel { right: 16px; bottom: 16px; height: calc(100vh - 32px); }
+    .nk-chat-fab { right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+    .nk-nudge { right: 16px; bottom: calc(86px + env(safe-area-inset-bottom, 0px)); max-width: calc(100vw - 32px); }
+    .nk-chat-panel {
+        right: 8px;
+        left: 8px;
+        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+        width: auto;
+        max-width: none;
+        height: calc(100vh - 16px);
+        height: calc(100dvh - 16px);
+        max-height: none;
+    }
+    .nk-chat-log { overscroll-behavior: contain; padding: 14px 12px 6px; }
+    .nk-msg-bot { max-width: calc(100% - 36px); }
+    .nk-chat-input { font-size: 16px; } /* 16px stops iOS Safari zooming on focus */
+    .nk-chat-close { padding: 12px; margin: -6px; }
+    .nk-chat-form { padding-bottom: 12px; }
 }

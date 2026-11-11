@@ -196,12 +196,27 @@ ${knowledge}`;
             ask(q);
         });
 
+        // On phones, keep the panel inside the visible area when the on-screen keyboard opens.
+        const vv = window.visualViewport;
+        const fit = () => {
+            if (!vv || panel.hidden) return;
+            if (window.innerWidth <= 480) {
+                panel.style.height = (vv.height - 16) + 'px';
+                panel.style.bottom = (window.innerHeight - vv.height - vv.offsetTop + 8) + 'px';
+                scroll();
+            } else {
+                panel.style.height = '';
+                panel.style.bottom = '';
+            }
+        };
+        if (vv) { vv.addEventListener('resize', fit); vv.addEventListener('scroll', fit); }
+
         const hideNudge = () => { nudge.hidden = true; };
         const toggle = (open) => {
             if (open) hideNudge();
             panel.hidden = !open;
             fab.classList.toggle('is-open', open);
-            if (open) input.focus();
+            if (open) { fit(); input.focus(); }
         };
         fab.addEventListener('click', () => toggle(panel.hidden));
         nudge.querySelector('.nk-nudge-text').addEventListener('click', () => toggle(true));
