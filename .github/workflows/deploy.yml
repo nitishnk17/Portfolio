@@ -28,7 +28,7 @@ jobs:
           done
       - name: Fail if an API key is committed
         run: |
-          if grep -rEn --exclude-dir=.git --exclude-dir=node_modules 'AIza[0-9A-Za-z_-]{30,}|AQ\.[0-9A-Za-z_-]{30,}' .; then
+          if git ls-files -z | xargs -0 grep -EIn 'AIza[0-9A-Za-z_-]{30,}|AQ\.[0-9A-Za-z_-]{30,}'; then
             echo "API key found in repository files"; exit 1
           fi
       - name: Check local assets referenced by index.html exist
