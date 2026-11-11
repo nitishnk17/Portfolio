@@ -22,6 +22,7 @@ module.exports = async (req, res) => {
         const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'x-goog-api-key': GEMINI_API_KEY },
+            signal: AbortSignal.timeout(20000),
             body: JSON.stringify({
                 systemInstruction,
                 contents,
@@ -30,6 +31,6 @@ module.exports = async (req, res) => {
         });
         res.status(r.status).json(await r.json());
     } catch (e) {
-        res.status(502).json({ error: 'upstream failure' });
+        res.status(504).json({ error: 'upstream timeout' });
     }
 };

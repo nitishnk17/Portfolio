@@ -2048,6 +2048,9 @@ body {
 .text-gold { color: var(--gold); }
 .text-rose { color: var(--rose); font-weight: 700; }
 
+/* close the unclosed @media (max-width: 640px) block above */
+}
+
 /* ==========================================================================
       AI ASSISTANT CHAT WIDGET
    ========================================================================== */

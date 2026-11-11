@@ -3,3 +3,4 @@
 .github
 server.js
 README.md
+.env.local

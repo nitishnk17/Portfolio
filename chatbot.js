@@ -153,6 +153,7 @@ ${knowledge}`;
         }
         if (!res.ok) {
             if (res.status === 429) throw new Error('Too many requests right now. Please try again in a moment.');
+            if (res.status === 503 || res.status === 504) throw new Error('The AI service is busy right now. Please try again in a minute.');
             if (res.status === 400 || res.status === 403) throw new Error('The assistant could not authenticate. Please contact Nitish directly.');
             throw new Error('Something went wrong. Please try again.');
         }
