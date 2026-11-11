@@ -10,49 +10,22 @@ try {
     }
 } catch (e) { /* .env optional if variables are set in the host environment */ }
 
-const { GROQ_API_KEY, GROQ_MODEL = 'openai/gpt-oss-120b', PORT = 8000 } = process.env;
+const { PORT = 8000 } = process.env;
+const chatHandler = require('./api/chat.js');
 const PUBLIC = new Set(['index.html', 'styles.css', 'script.js', 'chatbot.js', 'chatbot-knowledge.js', 'Nitish_Resume_.pdf']);
 const TYPES = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.pdf': 'application/pdf' };
 
-const hits = new Map(); // ip -> [timestamps], 20 requests/minute
-function limited(ip) {
-    const now = Date.now();
-    const recent = (hits.get(ip) || []).filter((t) => now - t < 60000);
-    recent.push(now);
-    hits.set(ip, recent);
-    return recent.length > 20;
-}
-
 async function chat(req, res) {
-    if (!GROQ_API_KEY) return send(res, 500, { error: 'not configured' });
-    if (limited(req.socket.remoteAddress)) return send(res, 429, { error: 'rate limited' });
     let body = '';
     for await (const chunk of req) {
         body += chunk;
         if (body.length > 100000) return send(res, 413, { error: 'too large' });
     }
-    let parsed;
-    try { parsed = JSON.parse(body); } catch { return send(res, 400, { error: 'bad json' }); }
-    if (!Array.isArray(parsed.messages) || typeof parsed.system !== 'string') return send(res, 400, { error: 'bad request' });
-    try {
-        const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${GROQ_API_KEY}` },
-            signal: AbortSignal.timeout(20000),
-            body: JSON.stringify({
-                model: GROQ_MODEL,
-                messages: [{ role: 'system', content: parsed.system }, ...parsed.messages],
-                temperature: 0.3,
-                max_completion_tokens: 1000,
-                reasoning_effort: 'low'
-            })
-        });
-        const data = await r.json();
-        if (!r.ok) return send(res, r.status, { error: 'upstream error' });
-        send(res, 200, { text: data.choices?.[0]?.message?.content || '' });
-    } catch (e) {
-        send(res, 504, { error: 'upstream timeout' });
-    }
+    try { req.body = JSON.parse(body); } catch { return send(res, 400, { error: 'bad json' }); }
+    // Give the Node response the small Express-style helpers api/chat.js expects.
+    res.status = (code) => { res.statusCode = code; return res; };
+    res.json = (obj) => send(res, res.statusCode, obj);
+    chatHandler(req, res);
 }
 
 function send(res, status, obj) {
