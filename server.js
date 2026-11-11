@@ -11,8 +11,8 @@ try {
 } catch (e) { /* .env optional if variables are set in the host environment */ }
 
 const { GEMINI_API_KEY, GEMINI_MODEL = 'gemini-3.8-flash', PORT = 8000 } = process.env;
-const PUBLIC = new Set(['index.html', 'styles.css', 'script.js', 'chatbot.js', 'chatbot-knowledge.js']);
-const TYPES = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript' };
+const PUBLIC = new Set(['index.html', 'styles.css', 'script.js', 'chatbot.js', 'chatbot-knowledge.js', 'Nitish_Resume_.pdf']);
+const TYPES = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.pdf': 'application/pdf' };
 
 const hits = new Map(); // ip -> [timestamps], 20 requests/minute
 function limited(ip) {
