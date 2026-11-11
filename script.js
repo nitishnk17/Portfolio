@@ -197,6 +197,13 @@ function init3DScene() {
     coreLight.position.set(0, 0.8, 2.5);
     robot.add(coreLight);
 
+    // 💡 Interactive Robot Laser Spotlight Beam
+    const robotSpotlight = new THREE.SpotLight(0x818cf8, 4.0, 100, 0.45, 0.5);
+    robotSpotlight.position.set(0, 0.8, 2.0);
+    robotSpotlight.target.position.set(0, -10, 40);
+    robot.add(robotSpotlight);
+    robot.add(robotSpotlight.target);
+
     // Head
     const headGroup = new THREE.Group();
     headGroup.position.y = 3.8;
@@ -265,23 +272,34 @@ function init3DScene() {
     robot.scale.set(0.95, 0.95, 0.95);
     scene.add(robot);
 
-    // ── Scroll-Bound Keyframe Journey ──
-    const isDesktop = window.innerWidth > 1024;
-    const KEYFRAMES = [
-        { scroll: 0.0,  pos: { x: isDesktop ? 24 : 0,  y: isDesktop ? 4 : -10, z: 36 }, rot: { x: 0.1, y: -0.4, z: 0 },   scale: 0.95, color: 0x818cf8 },
-        { scroll: 0.20, pos: { x: isDesktop ? -26 : 0, y: isDesktop ? -8 : -14, z: 38 }, rot: { x: 0.15, y: 0.5, z: -0.05 }, scale: 1.0,  color: 0x38bdf8 },
-        { scroll: 0.45, pos: { x: isDesktop ? 26 : 0,  y: isDesktop ? -12 : -18, z: 36 }, rot: { x: -0.1, y: -0.6, z: 0.05 }, scale: 0.95, color: 0xfbbf24 },
-        { scroll: 0.70, pos: { x: isDesktop ? -24 : 0, y: isDesktop ? -15 : -20, z: 36 }, rot: { x: 0.05, y: 0.45, z: 0 },  scale: 0.9,  color: 0x34d399 },
-        { scroll: 0.90, pos: { x: isDesktop ? 26 : 0,  y: isDesktop ? -18 : -22, z: 36 }, rot: { x: 0.1, y: -0.35, z: -0.05 }, scale: 0.88, color: 0xa78bfa },
-        { scroll: 1.0,  pos: { x: isDesktop ? 22 : 0,  y: isDesktop ? -12 : -20, z: 38 }, rot: { x: 0.1, y: -0.2, z: 0 },   scale: 1.0,  color: 0xfb7185 }
-    ];
+    // ── Dynamic Responsive Robot Open-Space Companion Journey ──
+    function getKeyframes() {
+        const isDesktop = window.innerWidth > 900;
+        return [
+            // 0. Hero Section: Open space on right
+            { scroll: 0.00, pos: { x: isDesktop ? 18 : 0, y: isDesktop ? 1 : -1, z: 42 }, rot: { x: 0.05, y: -0.42, z: 0 }, scale: isDesktop ? 1.05 : 0.85, color: 0x818cf8 },
+            // 1. Internship Section: Top-right open space
+            { scroll: 0.16, pos: { x: isDesktop ? 19 : 0, y: isDesktop ? 3 : -1, z: 42 }, rot: { x: 0.08, y: -0.30, z: 0 }, scale: isDesktop ? 1.05 : 0.85, color: 0x38bdf8 },
+            // 2. Thesis Section: Right open margin
+            { scroll: 0.32, pos: { x: isDesktop ? 18 : 0, y: isDesktop ? 2 : -1, z: 42 }, rot: { x: 0.10, y: -0.15, z: 0 }, scale: isDesktop ? 1.05 : 0.85, color: 0x34d399 },
+            // 3. Featured Work Grid: Right open margin
+            { scroll: 0.50, pos: { x: isDesktop ? 19 : 0, y: isDesktop ? 1 : -1, z: 42 }, rot: { x: 0.06, y: -0.35, z: 0 }, scale: isDesktop ? 1.05 : 0.85, color: 0xfbbf24 },
+            // 4. About & Academic Pedigree: Open space under Academic Pedigree card
+            { scroll: 0.68, pos: { x: isDesktop ? 17 : 0, y: isDesktop ? -3 : -1, z: 42 }, rot: { x: 0.05, y: -0.50, z: 0 }, scale: isDesktop ? 1.05 : 0.85, color: 0xa78bfa },
+            // 5. Activities & Leadership: Right margin
+            { scroll: 0.82, pos: { x: isDesktop ? 19 : 0, y: isDesktop ? 2 : -1, z: 42 }, rot: { x: 0.08, y: -0.25, z: 0 }, scale: isDesktop ? 1.05 : 0.85, color: 0xfb7185 },
+            // 6. Toolkit & Contact: Bottom right open space
+            { scroll: 1.00, pos: { x: isDesktop ? 18 : 0, y: isDesktop ? 1 : -1, z: 42 }, rot: { x: 0.05, y: -0.42, z: 0 }, scale: isDesktop ? 1.05 : 0.85, color: 0x818cf8 }
+        ];
+    }
 
     function getJourneyState(scroll) {
         scroll = Math.max(0, Math.min(1, scroll));
-        let p1 = KEYFRAMES[0], p2 = KEYFRAMES[KEYFRAMES.length - 1];
-        for (let i = 0; i < KEYFRAMES.length - 1; i++) {
-            if (scroll >= KEYFRAMES[i].scroll && scroll <= KEYFRAMES[i + 1].scroll) {
-                p1 = KEYFRAMES[i]; p2 = KEYFRAMES[i + 1]; break;
+        const keyframes = getKeyframes();
+        let p1 = keyframes[0], p2 = keyframes[keyframes.length - 1];
+        for (let i = 0; i < keyframes.length - 1; i++) {
+            if (scroll >= keyframes[i].scroll && scroll <= keyframes[i + 1].scroll) {
+                p1 = keyframes[i]; p2 = keyframes[i + 1]; break;
             }
         }
         const range = p2.scroll - p1.scroll;
@@ -326,22 +344,122 @@ function init3DScene() {
     window.addEventListener('mousemove', (e) => {
         mouseX = ((e.clientX / window.innerWidth) - 0.5) * 28;
         mouseY = -((e.clientY / window.innerHeight) - 0.5) * 24;
-        const rsp = robot.position.clone().project(camera);
-        const rsx = (rsp.x * 0.5 + 0.5) * window.innerWidth;
-        const rsy = (-rsp.y * 0.5 + 0.5) * window.innerHeight;
-        if (Math.hypot(e.clientX - rsx, e.clientY - rsy) < 130) triggerDodge();
     }, { passive: true });
 
+    // ── Guided Tour Navigator System ──
+    const tourStops = [
+        { id: 'hero', stepLabel: 'TOUR GUIDE · WELCOME', msg: "Welcome! I'm Nitish's AI Guide Droid. Click 'Next Section' to take an interactive tour of his portfolio!" },
+        { id: 'internship', stepLabel: 'TOUR GUIDE · INTERNSHIP', msg: "Cerify Systems Internship! Nitish parallelized SKLEE smart-contract analyzers, achieving ~2.47× speedup across 1,000+ contracts." },
+        { id: 'thesis', stepLabel: 'TOUR GUIDE · THESIS', msg: "IIT Delhi M.Tech Thesis! Building a Distributed Symbolic Execution Engine with Chase-Lev work-stealing & GreenTrie constraint caching." },
+        { id: 'projects', stepLabel: 'TOUR GUIDE · WORK', msg: "Systems & Architecture Work! Lock-free runtimes, memory-bounded TPC-H engines, and MPI graph algorithms." },
+        { id: 'about', stepLabel: 'TOUR GUIDE · ABOUT', msg: "Academic Pedigree & Background! M.Tech in CSE at IIT Delhi, B.Tech at Tezpur University." },
+        { id: 'extracurricular', stepLabel: 'TOUR GUIDE · ACTIVITIES', msg: "Leadership & Mentorship! Graduate Teaching Assistant for 100+ students and NSS/UBA Coordinator." },
+        { id: 'skills', stepLabel: 'TOUR GUIDE · TOOLKIT', msg: "Technical Toolkit! C++, Distributed Systems, Lock-Free Runtimes, Compilers & GDB." },
+        { id: 'contact', stepLabel: 'TOUR GUIDE · GET IN TOUCH', msg: "Contact Nitish! Open for SWE, Backend Systems, and Core Infrastructure engineering roles." }
+    ];
+    let tourIdx = 0;
+
+    const raycaster = new THREE.Raycaster();
+    const mouseVec = new THREE.Vector2();
+
+    window.openRobotHUD = function () {
+        const hud = document.getElementById('robot-hud-widget');
+        const trig = document.getElementById('robot-trigger-pill');
+        if (hud) hud.classList.add('active');
+        if (trig) trig.style.display = 'none';
+    };
+
+    window.closeRobotHUD = function () {
+        const hud = document.getElementById('robot-hud-widget');
+        const trig = document.getElementById('robot-trigger-pill');
+        if (hud) hud.classList.remove('active');
+        if (trig) trig.style.display = 'inline-flex';
+    };
+
+    window.advanceTourStep = function () {
+        tourIdx = (tourIdx + 1) % tourStops.length;
+        updateTourUI();
+    };
+
+    window.restartTourStep = function () {
+        tourIdx = 0;
+        updateTourUI();
+    };
+
+    function updateTourUI() {
+        const stop = tourStops[tourIdx];
+        const stepEl = document.getElementById('hud-tour-step');
+        const msgEl = document.getElementById('hud-message');
+        
+        if (stepEl) stepEl.textContent = stop.stepLabel;
+        if (msgEl) {
+            msgEl.style.opacity = '0';
+            setTimeout(() => {
+                msgEl.textContent = stop.msg;
+                msgEl.style.opacity = '1';
+            }, 150);
+        }
+
+        const targetElem = document.getElementById(stop.id);
+        if (targetElem) {
+            targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        triggerStunt();
+        openRobotHUD();
+    }
+
+    window.nextRobotFact = function () {
+        advanceTourStep();
+    };
+
+    window.runLiveBenchmark = function () {
+        openRobotHUD();
+        triggerStunt();
+        
+        chestCore.scale.set(2.2, 2.2, 2.2);
+        coreLight.intensity = 8.0;
+        coreLight.color.setHex(0xfbbf24);
+        robotSpotlight.intensity = 10.0;
+
+        const termEl = document.getElementById('hud-terminal-stream');
+        if (termEl) {
+            termEl.style.display = 'block';
+            termEl.innerHTML = `
+                <div class="terminal-line text-cyan">&gt; SKLEE multi-core engine initializing...</div>
+                <div class="terminal-line text-green" style="animation-delay:0.15s">&gt; spawning 4 Chase-Lev work-stealing workers</div>
+                <div class="terminal-line text-gold" style="animation-delay:0.3s">&gt; GreenTrie constraint cache: 91.4% hit</div>
+                <div class="terminal-line text-rose" style="animation-delay:0.45s">&gt; TSan: 0 races. RESULT: 5.43x speedup!</div>
+            `;
+        }
+
+        setTimeout(() => {
+            chestCore.scale.set(1, 1, 1);
+            coreLight.intensity = 2.2;
+            coreLight.color.setHex(0xfb7185);
+            robotSpotlight.intensity = 4.0;
+        }, 1200);
+    };
+
     window.addEventListener('click', (e) => {
-        const rsp = robot.position.clone().project(camera);
-        const rsx = (rsp.x * 0.5 + 0.5) * window.innerWidth;
-        const rsy = (-rsp.y * 0.5 + 0.5) * window.innerHeight;
-        if (Math.hypot(e.clientX - rsx, e.clientY - rsy) < 180) triggerDodge();
+        if (e.target.closest('a, button, input')) return;
+        
+        mouseVec.x = (e.clientX / window.innerWidth) * 2 - 1;
+        mouseVec.y = -(e.clientY / window.innerHeight) * 2 + 1;
+        
+        raycaster.setFromCamera(mouseVec, camera);
+        const intersects = raycaster.intersectObjects(robot.children, true);
+        
+        if (intersects.length > 0) {
+            triggerStunt();
+            chestCore.scale.set(1.7, 1.7, 1.7);
+            coreLight.intensity = 6.0;
+            setTimeout(() => { chestCore.scale.set(1, 1, 1); coreLight.intensity = 2.2; }, 350);
+        }
     });
 
     document.addEventListener('mouseover', (e) => {
         isHoveringInteractive = !!e.target.closest('a, button, .project-feature-card, .skill-category-card, .exp-card-glow');
-        if (isHoveringInteractive && Math.random() > 0.7 && currentStunt === 'none') triggerStunt();
     });
 
     window.addEventListener('scroll', () => {
