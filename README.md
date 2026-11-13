@@ -14,7 +14,7 @@ portfolio-site/
 ## ✨ Features & Aesthetics
 
 - 🎨 **Modern Dark-First & Light Mode**: Smooth theme switching with ambient glow effects, frosted glassmorphism navbar, and `localStorage` persistence.
-- ⚡ **Bento Grid Architecture**: High-impact metrics showcase (`2.47×` Cerify speedup, `5.57×` MPI scaling, `AIR 351` GATE CS, `Top 5` Query Engine).
+- ⚡ **Bento Grid Architecture**: High-impact metrics showcase (`2.47×` Cerify speedup, `5.57×` MPI scaling, `Top 5` Query Engine).
 - 🏷️ **Interactive Project Filter**: Filter systems projects across *Parallel & Distributed*, *Systems & Compilers*, and *Hardware & SIMD*.
 - 📋 **One-Click Clipboard Copy**: Click "Copy Email" to copy directly to clipboard with animated toast notification.
 - 📱 **Fully Responsive**: Optimized for ultra-wide desktops, laptops, tablets, and mobile devices.
